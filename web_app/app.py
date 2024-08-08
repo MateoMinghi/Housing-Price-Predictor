@@ -4,7 +4,7 @@ import pickle
 
 app = Flask(__name__)
 
-model = pickle.load(open("ufo-model.pkl", "rb"))
+model = pickle.load(open("housing-prices-model.pkl", "rb"))
 
 
 @app.route("/")
@@ -19,12 +19,11 @@ def predict():
     final_features = [np.array(int_features)]
     prediction = model.predict(final_features)
 
-    output = prediction[0]
 
-    countries = ["Australia", "Canada", "Germany", "UK", "US"]
+
 
     return render_template(
-        "index.html", prediction_text="Likely country: {}".format(countries[output])
+        "index.html", prediction_text="{}".format(prediction)
     )
 
 
