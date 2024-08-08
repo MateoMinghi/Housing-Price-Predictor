@@ -15,8 +15,14 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
 
-    int_features = [int(x) for x in request.form.values()]
-    final_features = [np.array(int_features)]
+    number_rooms = int(request.form['bedroom_count'])
+    distance_city = float(request.form['center_distance'])
+    distance_metro = float(request.form['metro_distance'])
+    age_house = int(request.form['age'])
+    net_area = float(request.form['net_sqm'])
+
+    
+    final_features = np.array([[number_rooms, net_area, distance_city, distance_metro, age_house]])
     prediction = model.predict(final_features)
 
 
